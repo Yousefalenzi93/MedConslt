@@ -1,0 +1,119 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "doctor@example.com",
+      "password": "demo123",
+      "fullName": "د. أحمد محمد علي",
+      "role": "doctor",
+      "specialty": "طب القلب والأوعية الدموية",
+      "phone": "+966501234567",
+      "avatar": "/images/doctors/doctor1.jpg",
+      "isActive": true,
+      "rating": 4.9,
+      "experience": 15,
+      "education": "دكتوراه في طب القلب - جامعة الملك سعود",
+      "certifications": ["البورد السعودي لطب القلب", "زمالة جراحة القلب"],
+      "workingHours": {
+        "sunday": "09:00-17:00",
+        "monday": "09:00-17:00",
+        "tuesday": "09:00-17:00",
+        "wednesday": "09:00-17:00",
+        "thursday": "09:00-17:00",
+        "friday": "14:00-18:00",
+        "saturday": "مغلق"
+      },
+      "consultationFee": 200,
+      "totalConsultations": 1247,
+      "completedConsultations": 1189,
+      "createdAt": "2023-01-15T10:00:00Z",
+      "lastActive": "2024-06-17T14:30:00Z"
+    },
+    {
+      "id": "2",
+      "email": "admin@example.com",
+      "password": "admin123",
+      "fullName": "مدير النظام",
+      "role": "admin",
+      "phone": "+966501234568",
+      "avatar": "/images/admin/admin1.jpg",
+      "isActive": true,
+      "permissions": ["manage_doctors", "manage_patients", "view_analytics", "manage_system"],
+      "createdAt": "2023-01-01T10:00:00Z",
+      "lastActive": "2024-06-17T15:00:00Z"
+    },
+    {
+      "id": "3",
+      "email": "patient1@example.com",
+      "password": "patient123",
+      "fullName": "محمد أحمد السالم",
+      "role": "patient",
+      "phone": "+966501234569",
+      "avatar": "/images/patients/patient1.jpg",
+      "isActive": true,
+      "dateOfBirth": "1985-05-15",
+      "gender": "male",
+      "bloodType": "O+",
+      "allergies": ["البنسلين"],
+      "chronicDiseases": ["ارتفاع ضغط الدم"],
+      "emergencyContact": {
+        "name": "فاطمة السالم",
+        "phone": "+966501234570",
+        "relation": "زوجة"
+      },
+      "createdAt": "2023-02-01T10:00:00Z",
+      "lastActive": "2024-06-17T13:45:00Z"
+    },
+    {
+      "id": "4",
+      "email": "doctor2@example.com",
+      "password": "demo123",
+      "fullName": "د. سارة أحمد الزهراني",
+      "role": "doctor",
+      "specialty": "طب الأطفال",
+      "phone": "+966501234571",
+      "avatar": "/images/doctors/doctor2.jpg",
+      "isActive": true,
+      "rating": 4.8,
+      "experience": 12,
+      "education": "دكتوراه في طب الأطفال - جامعة الملك عبدالعزيز",
+      "certifications": ["البورد السعودي لطب الأطفال"],
+      "workingHours": {
+        "sunday": "08:00-16:00",
+        "monday": "08:00-16:00",
+        "tuesday": "08:00-16:00",
+        "wednesday": "08:00-16:00",
+        "thursday": "08:00-16:00",
+        "friday": "مغلق",
+        "saturday": "10:00-14:00"
+      },
+      "consultationFee": 180,
+      "totalConsultations": 892,
+      "completedConsultations": 856,
+      "createdAt": "2023-01-20T10:00:00Z",
+      "lastActive": "2024-06-17T12:15:00Z"
+    },
+    {
+      "id": "5",
+      "email": "patient2@example.com",
+      "password": "patient123",
+      "fullName": "فاطمة علي الأحمد",
+      "role": "patient",
+      "phone": "+966501234572",
+      "avatar": "/images/patients/patient2.jpg",
+      "isActive": true,
+      "dateOfBirth": "1990-08-22",
+      "gender": "female",
+      "bloodType": "A+",
+      "allergies": [],
+      "chronicDiseases": [],
+      "emergencyContact": {
+        "name": "علي الأحمد",
+        "phone": "+966501234573",
+        "relation": "زوج"
+      },
+      "createdAt": "2023-03-10T10:00:00Z",
+      "lastActive": "2024-06-17T11:30:00Z"
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "tickets": [
+    {
+      "id": "1",
+      "userId": "3",
+      "title": "مشكلة في تسجيل الدخول",
+      "description": "لا أستطيع تسجيل الدخول إلى حسابي رغم أن كلمة المرور صحيحة",
+      "category": "technical",
+      "priority": "medium",
+      "status": "resolved",
+      "assignedTo": "2",
+      "tags": ["تسجيل دخول", "كلمة مرور", "حساب"],
+      "attachments": [
+        {
+          "id": "1",
+          "name": "screenshot_error.png",
+          "url": "/files/support/screenshot_error.png",
+          "type": "image/png",
+          "size": 256000
+        }
+      ],
+      "createdAt": "2024-06-15T09:30:00Z",
+      "updatedAt": "2024-06-15T14:20:00Z",
+      "resolvedAt": "2024-06-15T14:20:00Z"
+    },
+    {
+      "id": "2",
+      "userId": "5",
+      "title": "طلب استرداد رسوم استشارة",
+      "description": "أريد استرداد رسوم الاستشارة التي تم إلغاؤها من قبل الطبيب في اللحظة الأخيرة",
+      "category": "billing",
+      "priority": "high",
+      "status": "in_progress",
+      "assignedTo": "2",
+      "tags": ["استرداد", "رسوم", "إلغاء"],
+      "attachments": [],
+      "createdAt": "2024-06-16T11:15:00Z",
+      "updatedAt": "2024-06-17T10:30:00Z"
+    },
+    {
+      "id": "3",
+      "userId": "1",
+      "title": "اقتراح تحسين واجهة المستخدم",
+      "description": "أقترح إضافة خاصية البحث السريع في قائمة المرضى لتسهيل الوصول للملفات",
+      "category": "feature_request",
+      "priority": "low",
+      "status": "open",
+      "assignedTo": null,
+      "tags": ["تحسين", "واجهة", "بحث"],
+      "attachments": [
+        {
+          "id": "2",
+          "name": "ui_mockup.pdf",
+          "url": "/files/support/ui_mockup.pdf",
+          "type": "application/pdf",
+          "size": 512000
+        }
+      ],
+      "createdAt": "2024-06-17T08:45:00Z",
+      "updatedAt": "2024-06-17T08:45:00Z"
+    },
+    {
+      "id": "4",
+      "userId": "4",
+      "title": "مشكلة في جودة المكالمة المرئية",
+      "description": "أواجه مشاكل في جودة الصوت والصورة أثناء المكالمات المرئية مع المرضى",
+      "category": "technical",
+      "priority": "high",
+      "status": "open",
+      "assignedTo": "2",
+      "tags": ["مكالمة مرئية", "جودة", "صوت", "صورة"],
+      "attachments": [],
+      "createdAt": "2024-06-17T13:20:00Z",
+      "updatedAt": "2024-06-17T13:20:00Z"
+    },
+    {
+      "id": "5",
+      "userId": "3",
+      "title": "استفسار عن خصوصية البيانات",
+      "description": "أريد معرفة كيف يتم حماية بياناتي الطبية الشخصية في المنصة",
+      "category": "general",
+      "priority": "medium",
+      "status": "resolved",
+      "assignedTo": "2",
+      "tags": ["خصوصية", "بيانات", "أمان"],
+      "attachments": [],
+      "createdAt": "2024-06-14T16:00:00Z",
+      "updatedAt": "2024-06-15T09:15:00Z",
+      "resolvedAt": "2024-06-15T09:15:00Z"
+    }
+  ],
+  "responses": [
+    {
+      "id": "1",
+      "ticketId": "1",
+      "userId": "2",
+      "message": "شكراً لتواصلك معنا. سأقوم بفحص المشكلة والعودة إليك قريباً.",
+      "isInternal": false,
+      "createdAt": "2024-06-15T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "ticketId": "1",
+      "userId": "2",
+      "message": "تم حل المشكلة. كانت هناك مشكلة مؤقتة في الخادم. يرجى المحاولة مرة أخرى.",
+      "isInternal": false,
+      "createdAt": "2024-06-15T14:20:00Z"
+    },
+    {
+      "id": "3",
+      "ticketId": "1",
+      "userId": "3",
+      "message": "شكراً لكم، تم حل المشكلة وأستطيع الآن تسجيل الدخول بنجاح.",
+      "isInternal": false,
+      "createdAt": "2024-06-15T14:25:00Z"
+    },
+    {
+      "id": "4",
+      "ticketId": "2",
+      "userId": "2",
+      "message": "تم استلام طلبك. سيتم مراجعة الحالة ومعالجة الاسترداد خلال 3-5 أيام عمل.",
+      "isInternal": false,
+      "createdAt": "2024-06-16T14:30:00Z"
+    },
+    {
+      "id": "5",
+      "ticketId": "5",
+      "userId": "2",
+      "message": "بياناتك محمية بأعلى معايير الأمان وفقاً لقوانين حماية البيانات. يمكنك مراجعة سياسة الخصوصية للمزيد من التفاصيل.",
+      "isInternal": false,
+      "createdAt": "2024-06-15T09:15:00Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "technical",
+      "name": "مشاكل تقنية",
+      "description": "مشاكل متعلقة بالنظام والتطبيق",
+      "color": "#ef4444",
+      "icon": "cog"
+    },
+    {
+      "id": "billing",
+      "name": "الفواتير والمدفوعات",
+      "description": "استفسارات حول الرسوم والمدفوعات",
+      "color": "#10b981",
+      "icon": "credit-card"
+    },
+    {
+      "id": "feature_request",
+      "name": "طلب ميزة جديدة",
+      "description": "اقتراحات لتحسين المنصة",
+      "color": "#8b5cf6",
+      "icon": "light-bulb"
+    },
+    {
+      "id": "general",
+      "name": "استفسارات عامة",
+      "description": "أسئلة واستفسارات عامة",
+      "color": "#06b6d4",
+      "icon": "question-mark-circle"
+    }
+  ],
+  "faq": [
+    {
+      "id": "1",
+      "question": "كيف يمكنني حجز استشارة طبية؟",
+      "answer": "يمكنك حجز استشارة من خلال تصفح قائمة الأطباء، اختيار الطبيب المناسب، تحديد الوقت المناسب، وإكمال عملية الدفع.",
+      "category": "general",
+      "views": 1247,
+      "helpful": 156,
+      "notHelpful": 12
+    },
+    {
+      "id": "2",
+      "question": "ما هي طرق الدفع المتاحة؟",
+      "answer": "نقبل جميع البطاقات الائتمانية الرئيسية، التحويل البنكي، والدفع عبر المحافظ الإلكترونية.",
+      "category": "billing",
+      "views": 892,
+      "helpful": 98,
+      "notHelpful": 8
+    },
+    {
+      "id": "3",
+      "question": "هل يمكنني إلغاء الاستشارة؟",
+      "answer": "يمكن إلغاء الاستشارة قبل 24 ساعة من الموعد المحدد مع استرداد كامل للرسوم.",
+      "category": "general",
+      "views": 567,
+      "helpful": 67,
+      "notHelpful": 5
+    },
+    {
+      "id": "4",
+      "question": "كيف أضمن خصوصية بياناتي؟",
+      "answer": "جميع البيانات مشفرة ومحمية وفقاً لأعلى معايير الأمان الطبي والقوانين المحلية.",
+      "category": "general",
+      "views": 734,
+      "helpful": 89,
+      "notHelpful": 3
+    }
+  ],
+  "stats": {
+    "totalTickets": 5,
+    "openTickets": 2,
+    "inProgressTickets": 1,
+    "resolvedTickets": 2,
+    "averageResponseTime": "4.2 ساعات",
+    "averageResolutionTime": "1.8 يوم",
+    "satisfactionRate": 92.5,
+    "lastUpdated": "2024-06-17T15:00:00Z"
+  }
+}

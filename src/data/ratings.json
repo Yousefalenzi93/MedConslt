@@ -1,0 +1,177 @@
+{
+  "ratings": [
+    {
+      "id": "1",
+      "doctorId": "1",
+      "patientId": "3",
+      "consultationId": "3",
+      "rating": 5,
+      "comment": "استشارة ممتازة، الدكتور شرح كل شيء بوضوح وأعطاني خطة علاج واضحة. أنصح به بشدة.",
+      "aspects": {
+        "communication": 5,
+        "expertise": 5,
+        "punctuality": 5,
+        "explanation": 5,
+        "overall": 5
+      },
+      "isAnonymous": false,
+      "isVerified": true,
+      "helpfulVotes": 12,
+      "totalVotes": 14,
+      "createdAt": "2024-06-15T12:00:00Z",
+      "updatedAt": "2024-06-15T12:00:00Z"
+    },
+    {
+      "id": "2",
+      "doctorId": "4",
+      "patientId": "5",
+      "consultationId": "4",
+      "rating": 5,
+      "comment": "دكتورة رائعة، صبورة جداً مع الأطفال وتشرح بطريقة مفهومة. ابني أحبها كثيراً.",
+      "aspects": {
+        "communication": 5,
+        "expertise": 5,
+        "punctuality": 4,
+        "explanation": 5,
+        "overall": 5
+      },
+      "isAnonymous": false,
+      "isVerified": true,
+      "helpfulVotes": 8,
+      "totalVotes": 9,
+      "createdAt": "2024-06-10T15:30:00Z",
+      "updatedAt": "2024-06-10T15:30:00Z"
+    },
+    {
+      "id": "3",
+      "doctorId": "1",
+      "patientId": "3",
+      "rating": 4,
+      "comment": "دكتور ممتاز ولكن أحياناً يتأخر قليلاً عن الموعد المحدد. المعلومات الطبية دقيقة ومفيدة.",
+      "aspects": {
+        "communication": 5,
+        "expertise": 5,
+        "punctuality": 3,
+        "explanation": 4,
+        "overall": 4
+      },
+      "isAnonymous": true,
+      "isVerified": true,
+      "helpfulVotes": 5,
+      "totalVotes": 7,
+      "createdAt": "2024-06-05T14:20:00Z",
+      "updatedAt": "2024-06-05T14:20:00Z"
+    },
+    {
+      "id": "4",
+      "doctorId": "4",
+      "patientId": "5",
+      "rating": 5,
+      "comment": "أفضل دكتورة أطفال تعاملت معها. تهتم بالتفاصيل وتتابع الحالة باستمرار.",
+      "aspects": {
+        "communication": 5,
+        "expertise": 5,
+        "punctuality": 5,
+        "explanation": 5,
+        "overall": 5
+      },
+      "isAnonymous": false,
+      "isVerified": true,
+      "helpfulVotes": 15,
+      "totalVotes": 16,
+      "createdAt": "2024-05-28T16:45:00Z",
+      "updatedAt": "2024-05-28T16:45:00Z"
+    },
+    {
+      "id": "5",
+      "doctorId": "1",
+      "patientId": "3",
+      "rating": 5,
+      "comment": "خبرة عالية في مجال القلب، ساعدني كثيراً في فهم حالتي وطريقة العلاج.",
+      "aspects": {
+        "communication": 4,
+        "expertise": 5,
+        "punctuality": 5,
+        "explanation": 5,
+        "overall": 5
+      },
+      "isAnonymous": false,
+      "isVerified": true,
+      "helpfulVotes": 9,
+      "totalVotes": 10,
+      "createdAt": "2024-05-20T11:30:00Z",
+      "updatedAt": "2024-05-20T11:30:00Z"
+    },
+    {
+      "id": "6",
+      "doctorId": "4",
+      "patientId": "5",
+      "rating": 4,
+      "comment": "دكتورة جيدة، لكن أحياناً تكون الاستشارة سريعة قليلاً. بشكل عام راضية عن الخدمة.",
+      "aspects": {
+        "communication": 4,
+        "expertise": 5,
+        "punctuality": 4,
+        "explanation": 3,
+        "overall": 4
+      },
+      "isAnonymous": true,
+      "isVerified": true,
+      "helpfulVotes": 3,
+      "totalVotes": 5,
+      "createdAt": "2024-05-15T13:15:00Z",
+      "updatedAt": "2024-05-15T13:15:00Z"
+    }
+  ],
+  "doctorStats": [
+    {
+      "doctorId": "1",
+      "averageRating": 4.9,
+      "totalRatings": 156,
+      "ratingDistribution": {
+        "5": 134,
+        "4": 18,
+        "3": 3,
+        "2": 1,
+        "1": 0
+      },
+      "aspectAverages": {
+        "communication": 4.8,
+        "expertise": 4.9,
+        "punctuality": 4.6,
+        "explanation": 4.8,
+        "overall": 4.9
+      },
+      "totalHelpfulVotes": 1247,
+      "lastUpdated": "2024-06-17T10:00:00Z"
+    },
+    {
+      "doctorId": "4",
+      "averageRating": 4.8,
+      "totalRatings": 98,
+      "ratingDistribution": {
+        "5": 82,
+        "4": 14,
+        "3": 2,
+        "2": 0,
+        "1": 0
+      },
+      "aspectAverages": {
+        "communication": 4.9,
+        "expertise": 4.8,
+        "punctuality": 4.7,
+        "explanation": 4.8,
+        "overall": 4.8
+      },
+      "totalHelpfulVotes": 892,
+      "lastUpdated": "2024-06-17T10:00:00Z"
+    }
+  ],
+  "platformStats": {
+    "totalRatings": 254,
+    "averageRating": 4.85,
+    "satisfactionRate": 94.5,
+    "responseRate": 87.3,
+    "lastUpdated": "2024-06-17T10:00:00Z"
+  }
+}

@@ -1,0 +1,24 @@
+# Netlify redirects for SPA routing
+/*    /index.html   200
+
+# API redirects (if needed)
+/api/*  /api/:splat  200
+
+# Auth redirects
+/auth/*  /index.html  200
+
+# Dashboard redirects
+/dashboard/*  /index.html  200
+
+# Main app routes
+/consultations  /index.html  200
+/messages  /index.html  200
+/library  /index.html  200
+/ratings  /index.html  200
+/support  /index.html  200
+
+# Admin routes
+/admin/*  /index.html  200
+
+# Fallback for any other routes
+/*  /index.html  200

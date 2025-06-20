@@ -1,0 +1,148 @@
+{
+  "consultations": [
+    {
+      "id": "1",
+      "patientId": "3",
+      "doctorId": "1",
+      "title": "آلام في الصدر مع ضيق في التنفس",
+      "description": "أعاني من آلام في الصدر منذ يومين مع ضيق في التنفس خاصة عند المجهود. الألم يزداد عند التنفس العميق.",
+      "symptoms": ["آلام الصدر", "ضيق التنفس", "خفقان"],
+      "status": "pending",
+      "priority": "high",
+      "type": "video",
+      "scheduledDate": "2024-06-18T10:00:00Z",
+      "duration": 30,
+      "fee": 200,
+      "notes": "",
+      "diagnosis": "",
+      "prescription": [],
+      "attachments": [
+        {
+          "id": "1",
+          "name": "تخطيط القلب.pdf",
+          "url": "/files/ecg_report.pdf",
+          "type": "application/pdf",
+          "size": 1024000
+        }
+      ],
+      "createdAt": "2024-06-17T08:30:00Z",
+      "updatedAt": "2024-06-17T08:30:00Z"
+    },
+    {
+      "id": "2",
+      "patientId": "5",
+      "doctorId": "4",
+      "title": "حمى عند الطفل مع سعال",
+      "description": "طفلي عمره 5 سنوات يعاني من حمى 38.5 درجة منذ يومين مع سعال جاف وفقدان شهية.",
+      "symptoms": ["حمى", "سعال جاف", "فقدان شهية", "تعب عام"],
+      "status": "in_progress",
+      "priority": "medium",
+      "type": "chat",
+      "scheduledDate": "2024-06-17T16:00:00Z",
+      "duration": 20,
+      "fee": 180,
+      "notes": "تم فحص الطفل، يحتاج متابعة",
+      "diagnosis": "التهاب في الجهاز التنفسي العلوي",
+      "prescription": [
+        {
+          "medication": "باراسيتامول شراب",
+          "dosage": "5 مل كل 6 ساعات",
+          "duration": "3 أيام",
+          "instructions": "يؤخذ عند الحاجة للحمى"
+        }
+      ],
+      "attachments": [],
+      "createdAt": "2024-06-16T14:20:00Z",
+      "updatedAt": "2024-06-17T16:30:00Z"
+    },
+    {
+      "id": "3",
+      "patientId": "3",
+      "doctorId": "1",
+      "title": "متابعة ضغط الدم",
+      "description": "متابعة دورية لضغط الدم وتقييم فعالية العلاج الحالي.",
+      "symptoms": ["ارتفاع ضغط الدم"],
+      "status": "completed",
+      "priority": "low",
+      "type": "video",
+      "scheduledDate": "2024-06-15T11:00:00Z",
+      "duration": 25,
+      "fee": 200,
+      "notes": "ضغط الدم تحت السيطرة، يُنصح بالاستمرار على العلاج",
+      "diagnosis": "ارتفاع ضغط الدم المُسيطر عليه",
+      "prescription": [
+        {
+          "medication": "أملوديبين 5 مجم",
+          "dosage": "قرص واحد يومياً",
+          "duration": "شهر",
+          "instructions": "يؤخذ صباحاً مع الطعام"
+        }
+      ],
+      "attachments": [
+        {
+          "id": "2",
+          "name": "قراءات ضغط الدم.xlsx",
+          "url": "/files/bp_readings.xlsx",
+          "type": "application/vnd.ms-excel",
+          "size": 512000
+        }
+      ],
+      "rating": 5,
+      "feedback": "استشارة ممتازة، الدكتور شرح كل شيء بوضوح",
+      "createdAt": "2024-06-14T09:00:00Z",
+      "updatedAt": "2024-06-15T11:30:00Z",
+      "completedAt": "2024-06-15T11:25:00Z"
+    },
+    {
+      "id": "4",
+      "patientId": "5",
+      "doctorId": "4",
+      "title": "استشارة حول تطعيمات الطفل",
+      "description": "أريد معرفة التطعيمات المطلوبة لطفلي البالغ من العمر 18 شهر.",
+      "symptoms": [],
+      "status": "completed",
+      "priority": "low",
+      "type": "chat",
+      "scheduledDate": "2024-06-10T14:00:00Z",
+      "duration": 15,
+      "fee": 180,
+      "notes": "تم توضيح جدول التطعيمات المطلوبة",
+      "diagnosis": "استشارة وقائية - جدول التطعيمات",
+      "prescription": [],
+      "attachments": [
+        {
+          "id": "3",
+          "name": "جدول التطعيمات.pdf",
+          "url": "/files/vaccination_schedule.pdf",
+          "type": "application/pdf",
+          "size": 256000
+        }
+      ],
+      "rating": 5,
+      "feedback": "معلومات مفيدة جداً، شكراً للدكتورة",
+      "createdAt": "2024-06-09T10:00:00Z",
+      "updatedAt": "2024-06-10T14:20:00Z",
+      "completedAt": "2024-06-10T14:15:00Z"
+    },
+    {
+      "id": "5",
+      "patientId": "3",
+      "doctorId": "1",
+      "title": "استشارة طارئة - ألم شديد في الصدر",
+      "description": "ألم شديد ومفاجئ في الصدر مع تعرق وغثيان. بدأ منذ ساعة.",
+      "symptoms": ["ألم شديد في الصدر", "تعرق", "غثيان", "دوخة"],
+      "status": "urgent",
+      "priority": "urgent",
+      "type": "video",
+      "scheduledDate": "2024-06-17T20:00:00Z",
+      "duration": 45,
+      "fee": 300,
+      "notes": "حالة طارئة - يحتاج تقييم فوري",
+      "diagnosis": "",
+      "prescription": [],
+      "attachments": [],
+      "createdAt": "2024-06-17T19:30:00Z",
+      "updatedAt": "2024-06-17T19:30:00Z"
+    }
+  ]
+}

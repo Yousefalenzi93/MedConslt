@@ -1,0 +1,93 @@
+[build]
+  publish = "out"
+  command = "npm ci && npm run build"
+
+[build.environment]
+  NODE_VERSION = "18.17.0"
+  NPM_VERSION = "9.6.7"
+  NODE_ENV = "production"
+  NEXT_TELEMETRY_DISABLED = "1"
+  CI = "true"
+  NETLIFY = "true"
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Redirects for SPA routing
+[[redirects]]
+  from = "/auth/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/consultations/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/messages/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/library/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/ratings/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/support/*"
+  to = "/index.html"
+  status = 200
+
+# Fallback for any other routes
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
