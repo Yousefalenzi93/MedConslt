@@ -1,3 +1,0 @@
-@echo off
-echo Starting Medical Consultation Platform...
-npm run dev
