@@ -1,10 +1,7 @@
 'use client';
 
-// Force dynamic rendering to avoid static generation issues with event handlers
-export const dynamic = 'force-dynamic';
-
 import React, { useState, useEffect, useRef } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext.simple';
 import { localDataService, Conversation, Message, User } from '@/services/localDataService';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import {

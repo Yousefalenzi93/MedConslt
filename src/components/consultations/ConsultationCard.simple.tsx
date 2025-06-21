@@ -4,54 +4,30 @@ import React from 'react';
 import { ConsultationRequest } from '@/types';
 import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
-import {
-  ClockIcon,
+import { 
+  ClockIcon, 
   ExclamationTriangleIcon,
   CheckCircleIcon,
-  XCircleIcon,
-  PaperClipIcon,
-  CalendarIcon
+  XCircleIcon 
 } from '@heroicons/react/24/outline';
 import { clsx } from 'clsx';
-// Simple date formatting function
-const formatTimeAgo = (date: string) => {
-  const now = new Date();
-  const past = new Date(date);
-  const diffInMinutes = Math.floor((now.getTime() - past.getTime()) / (1000 * 60));
-
-  if (diffInMinutes < 1) return 'الآن';
-  if (diffInMinutes < 60) return `منذ ${diffInMinutes} دقيقة`;
-
-  const diffInHours = Math.floor(diffInMinutes / 60);
-  if (diffInHours < 24) return `منذ ${diffInHours} ساعة`;
-
-  const diffInDays = Math.floor(diffInHours / 24);
-  if (diffInDays < 7) return `منذ ${diffInDays} يوم`;
-
-  const diffInWeeks = Math.floor(diffInDays / 7);
-  if (diffInWeeks < 4) return `منذ ${diffInWeeks} أسبوع`;
-
-  const diffInMonths = Math.floor(diffInDays / 30);
-  return `منذ ${diffInMonths} شهر`;
-};
 
 interface ConsultationCardProps {
   consultation: ConsultationRequest;
   showActions?: boolean;
 }
 
-export default function ConsultationCard({
-  consultation,
-  showActions = true
+export default function ConsultationCard({ 
+  consultation, 
+  showActions = false 
 }: ConsultationCardProps) {
+  
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending':
         return 'text-warning-600 bg-warning-100';
       case 'accepted':
         return 'text-primary-600 bg-primary-100';
-      case 'in-progress':
-        return 'text-blue-600 bg-blue-100';
       case 'completed':
         return 'text-success-600 bg-success-100';
       case 'rejected':
@@ -67,8 +43,6 @@ export default function ConsultationCard({
         return 'في الانتظار';
       case 'accepted':
         return 'مقبولة';
-      case 'in-progress':
-        return 'قيد المعالجة';
       case 'completed':
         return 'مكتملة';
       case 'rejected':
@@ -80,23 +54,21 @@ export default function ConsultationCard({
 
   const getUrgencyIcon = (urgency: string) => {
     switch (urgency) {
-      case 'emergency':
-        return <ExclamationTriangleIcon className="h-4 w-4 text-error-600" />;
       case 'urgent':
-        return <ClockIcon className="h-4 w-4 text-warning-600" />;
+        return <ExclamationTriangleIcon className="h-4 w-4 text-error-500" />;
+      case 'normal':
+        return <ClockIcon className="h-4 w-4 text-warning-500" />;
       default:
-        return <CalendarIcon className="h-4 w-4 text-secondary-600" />;
+        return <ClockIcon className="h-4 w-4 text-secondary-500" />;
     }
   };
 
   const getUrgencyText = (urgency: string) => {
     switch (urgency) {
-      case 'emergency':
-        return 'طارئ';
       case 'urgent':
         return 'عاجل';
-      case 'routine':
-        return 'روتيني';
+      case 'normal':
+        return 'عادي';
       default:
         return urgency;
     }
@@ -148,35 +120,14 @@ export default function ConsultationCard({
       </CardHeader>
 
       <CardContent>
-        <div className="px-4 space-y-3">
-          <div>
-            <p className="text-sm font-medium text-secondary-700 mb-1">التخصص:</p>
-            <p className="text-sm text-secondary-600">{consultation.specialty}</p>
-          </div>
-
-          <div>
-            <p className="text-sm font-medium text-secondary-700 mb-1">الوصف:</p>
-            <p className="text-sm text-secondary-600 line-clamp-3">
-              {consultation.description}
-            </p>
-          </div>
-
-          {consultation.attachments && consultation.attachments.length > 0 && (
-            <div className="flex items-center space-x-2 space-x-reverse">
-              <PaperClipIcon className="h-4 w-4 text-secondary-400" />
-              <span className="text-xs text-secondary-600">
-                {consultation.attachments.length} مرفق
-              </span>
-            </div>
-          )}
-
+        <div className="px-4 py-2">
+          <p className="text-sm text-secondary-700 mb-3">
+            {consultation.description}
+          </p>
+          
           <div className="flex items-center justify-between text-xs text-secondary-500">
-            <span>
-              {formatTimeAgo(consultation.createdAt)}
-            </span>
-            {consultation.assignedDoctorName && (
-              <span>الطبيب: {consultation.assignedDoctorName}</span>
-            )}
+            <span>التخصص: {consultation.specialty}</span>
+            <span>{new Date(consultation.createdAt).toLocaleDateString('ar-SA')}</span>
           </div>
         </div>
       </CardContent>

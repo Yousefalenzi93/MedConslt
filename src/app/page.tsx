@@ -1,11 +1,8 @@
 'use client';
 
-// Force dynamic rendering to avoid static generation issues with event handlers
-export const dynamic = 'force-dynamic';
-
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext.simple';
 import Link from 'next/link';
 import dynamicImport from 'next/dynamic';
 import {

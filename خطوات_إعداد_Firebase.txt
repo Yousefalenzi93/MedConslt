@@ -1,0 +1,192 @@
+========================================
+خطوات إعداد Firebase السريع
+لمنصة الاستشارات الطبية
+========================================
+
+🔥 إعداد Firebase في 10 دقائق:
+
+1️⃣ إنشاء مشروع Firebase:
+==========================
+• اذهب إلى: https://console.firebase.google.com/
+• انقر "Create a project"
+• اسم المشروع: medical-consultation-platform
+• فعّل Google Analytics (اختياري)
+• انقر "Create project"
+
+2️⃣ إعداد Authentication:
+========================
+• اذهب إلى Authentication > Get started
+• في Sign-in method:
+  - فعّل Email/Password ✅
+  - فعّل Google (اختياري) ✅
+• في Settings > Authorized domains:
+  - أضف localhost (للتطوير)
+  - أضف نطاق موقعك (للإنتاج)
+
+3️⃣ إعداد Firestore Database:
+============================
+• اذهب إلى Firestore Database
+• انقر "Create database"
+• اختر "Start in test mode"
+• اختر موقع: europe-west (أو الأقرب)
+
+4️⃣ إعداد Storage:
+==================
+• اذهب إلى Storage
+• انقر "Get started"
+• اختر "Start in test mode"
+• اختر نفس موقع Firestore
+
+5️⃣ إضافة تطبيق الويب:
+======================
+• في Project Overview
+• انقر أيقونة الويب </> 
+• اسم التطبيق: Medical Consultation Web App
+• فعّل Firebase Hosting (اختياري)
+• انقر "Register app"
+
+6️⃣ نسخ إعدادات Firebase:
+=========================
+ستحصل على كود مثل:
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC...",
+  authDomain: "medical-consultation-platform.firebaseapp.com",
+  projectId: "medical-consultation-platform",
+  storageBucket: "medical-consultation-platform.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abcdef123456"
+};
+
+7️⃣ تحديث ملف .env.local:
+=========================
+افتح ملف .env.local وحدث هذه القيم:
+
+NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyC...
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=medical-consultation-platform.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=medical-consultation-platform
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=medical-consultation-platform.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=123456789
+NEXT_PUBLIC_FIREBASE_APP_ID=1:123456789:web:abcdef123456
+
+========================================
+
+🔒 قواعد الأمان الأساسية:
+
+Firestore Rules:
+================
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+
+Storage Rules:
+==============
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+
+========================================
+
+🧪 اختبار الإعداد:
+
+1. شغل النظام محلياً:
+   npm run dev
+
+2. اذهب إلى: http://localhost:3000
+
+3. جرب تسجيل حساب جديد
+
+4. جرب تسجيل الدخول
+
+5. تحقق من Firebase Console:
+   • Authentication > Users
+   • Firestore Database > Data
+
+========================================
+
+📊 هيكل قاعدة البيانات:
+
+Collections الرئيسية:
+======================
+
+/users/{userId}
+- email, fullName, role, specialization
+- phone, avatar, isActive, createdAt
+
+/consultations/{consultationId}  
+- patientId, doctorId, title, description
+- status, priority, specialization, createdAt
+
+/messages/{messageId}
+- consultationId, senderId, content
+- type, fileUrl, createdAt
+
+/medical-library/{documentId}
+- title, description, category, fileUrl
+- uploadedBy, downloads, rating, createdAt
+
+/ratings/{ratingId}
+- doctorId, patientId, consultationId
+- rating, comment, createdAt
+
+========================================
+
+⚠️ ملاحظات مهمة:
+
+للتطوير:
+• استخدم "test mode" في قواعد الأمان
+• localhost مسموح في Authorized domains
+
+للإنتاج:
+• غير قواعد الأمان لتكون أكثر صرامة
+• أضف نطاق موقعك في Authorized domains
+• فعّل App Check للحماية
+• راقب الاستخدام والتكاليف
+
+========================================
+
+🔧 حل المشاكل الشائعة:
+
+مشكلة: Firebase not initialized
+الحل: تحقق من متغيرات البيئة في .env.local
+
+مشكلة: Permission denied
+الحل: تحقق من قواعد الأمان في Firestore/Storage
+
+مشكلة: Auth domain not authorized  
+الحل: أضف النطاق في Authentication > Settings
+
+مشكلة: Quota exceeded
+الحل: راجع Usage في Firebase Console
+
+========================================
+
+📞 للمساعدة:
+
+1. راجع ملف FIREBASE_SETUP_GUIDE.md
+2. تحقق من Firebase Console logs
+3. راجع Network tab في Developer Tools
+4. تحقق من Console errors
+
+========================================
+
+🎯 النتيجة المتوقعة:
+
+بعد الإعداد الصحيح:
+• تسجيل الدخول يعمل ✅
+• حفظ البيانات في Firestore ✅  
+• رفع الملفات في Storage ✅
+• الإشعارات تعمل ✅
+• النظام متصل بالكامل مع Firebase ✅
+
+🔥 Firebase جاهز لمنصة الاستشارات الطبية! 🚀

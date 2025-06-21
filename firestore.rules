@@ -1,0 +1,180 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+             exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    function isDoctor() {
+      return isAuthenticated() && 
+             exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'doctor';
+    }
+    
+    function isActiveDoctor() {
+      return isDoctor() && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isActive == true;
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      allow create: if isAuthenticated() && isOwner(userId);
+      allow update: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    // Consultations collection
+    match /consultations/{consultationId} {
+      allow read: if isAuthenticated() && (
+        resource.data.requesterId == request.auth.uid ||
+        resource.data.assignedDoctorId == request.auth.uid ||
+        isAdmin()
+      );
+      allow create: if isActiveDoctor();
+      allow update: if isAuthenticated() && (
+        resource.data.requesterId == request.auth.uid ||
+        resource.data.assignedDoctorId == request.auth.uid ||
+        isAdmin()
+      );
+      allow delete: if isAdmin();
+    }
+
+    // Consultation responses
+    match /consultationResponses/{responseId} {
+      allow read: if isAuthenticated();
+      allow create: if isActiveDoctor();
+      allow update: if isAuthenticated() && resource.data.doctorId == request.auth.uid;
+      allow delete: if isAdmin() || (isAuthenticated() && resource.data.doctorId == request.auth.uid);
+    }
+
+    // Messages collection
+    match /messages/{messageId} {
+      allow read: if isAuthenticated() && (
+        resource.data.senderId == request.auth.uid ||
+        resource.data.receiverId == request.auth.uid
+      );
+      allow create: if isActiveDoctor() && request.auth.uid == request.resource.data.senderId;
+      allow update: if isAuthenticated() && (
+        resource.data.senderId == request.auth.uid ||
+        resource.data.receiverId == request.auth.uid
+      );
+      allow delete: if isAuthenticated() && resource.data.senderId == request.auth.uid;
+    }
+
+    // Conversations collection
+    match /conversations/{conversationId} {
+      allow read: if isAuthenticated() && request.auth.uid in resource.data.participants;
+      allow create: if isActiveDoctor() && request.auth.uid in request.resource.data.participants;
+      allow update: if isAuthenticated() && request.auth.uid in resource.data.participants;
+      allow delete: if isAdmin();
+    }
+
+    // Video calls collection
+    match /videoCalls/{callId} {
+      allow read: if isAuthenticated() && (
+        resource.data.doctorId == request.auth.uid ||
+        resource.data.patientId == request.auth.uid ||
+        isAdmin()
+      );
+      allow create: if isActiveDoctor();
+      allow update: if isAuthenticated() && (
+        resource.data.doctorId == request.auth.uid ||
+        resource.data.patientId == request.auth.uid
+      );
+      allow delete: if isAdmin();
+    }
+
+    // Library documents collection
+    match /libraryDocuments/{documentId} {
+      allow read: if isAuthenticated() && (resource.data.isPublic == true || isAdmin());
+      allow create: if isActiveDoctor();
+      allow update: if isAuthenticated() && (
+        resource.data.uploadedBy == request.auth.uid || isAdmin()
+      );
+      allow delete: if isAuthenticated() && (
+        resource.data.uploadedBy == request.auth.uid || isAdmin()
+      );
+    }
+
+    // Document ratings collection
+    match /documentRatings/{ratingId} {
+      allow read: if isAuthenticated();
+      allow create: if isActiveDoctor() && request.auth.uid == request.resource.data.raterId;
+      allow update: if isAuthenticated() && resource.data.raterId == request.auth.uid;
+      allow delete: if isAuthenticated() && (
+        resource.data.raterId == request.auth.uid || isAdmin()
+      );
+    }
+
+    // Consultation ratings collection
+    match /consultationRatings/{ratingId} {
+      allow read: if isAuthenticated() && (
+        resource.data.raterId == request.auth.uid ||
+        resource.data.doctorId == request.auth.uid ||
+        isAdmin()
+      );
+      allow create: if isActiveDoctor() && request.auth.uid == request.resource.data.raterId;
+      allow update: if isAuthenticated() && resource.data.raterId == request.auth.uid;
+      allow delete: if isAdmin();
+    }
+
+    // Support tickets collection
+    match /supportTickets/{ticketId} {
+      allow read: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+      allow create: if isAuthenticated() && request.auth.uid == request.resource.data.userId;
+      allow update: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+      allow delete: if isAdmin();
+    }
+
+    // Ticket messages collection
+    match /ticketMessages/{messageId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && resource.data.senderId == request.auth.uid;
+      allow delete: if isAdmin();
+    }
+
+    // Notifications collection
+    match /notifications/{notificationId} {
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      allow delete: if isAuthenticated() && (
+        resource.data.userId == request.auth.uid || isAdmin()
+      );
+    }
+
+    // Admin-only collections
+    match /analytics/{document=**} {
+      allow read, write: if isAdmin();
+    }
+
+    match /systemSettings/{document=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // Audit logs (admin only)
+    match /auditLogs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAuthenticated();
+      allow update, delete: if false; // Audit logs should be immutable
+    }
+  }
+}

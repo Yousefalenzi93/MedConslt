@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:netlify": "npm install --legacy-peer-deps && next build",
     "start": "next start",
     "lint": "next lint --fix",
     "type-check": "tsc --noEmit",
@@ -25,7 +26,17 @@
     "quick-setup-win": "powershell -ExecutionPolicy Bypass -File quick-setup.ps1",
     "setup-github": "bash setup-github.sh",
     "setup-github-win": "powershell -ExecutionPolicy Bypass -File setup-github.ps1",
-    "test-database": "node test-database.js"
+    "test-database": "node test-database.js",
+    "fix-netlify": "node fix-netlify-build.js",
+    "test-build-quick": "node test-build-quick.js",
+    "test-timeout-fix": "node test-timeout-fix.js",
+    "fix-event-handlers": "node fix-event-handlers.js",
+    "check-event-handlers": "node check-event-handlers.js",
+    "final-build-test": "node final-build-test.js",
+    "ultimate-fix": "node ultimate-fix.js",
+    "deploy": "node deploy-to-github.js",
+    "emergency-fix": "node emergency-fix.js",
+    "timeout-fix": "node timeout-fix.js"
   },
   "dependencies": {
     "next": "^14.0.4",

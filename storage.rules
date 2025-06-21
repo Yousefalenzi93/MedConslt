@@ -1,0 +1,81 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function isValidImageFile() {
+      return request.resource.contentType.matches('image/.*') &&
+             request.resource.size < 5 * 1024 * 1024; // 5MB limit
+    }
+    
+    function isValidDocumentFile() {
+      return request.resource.contentType == 'application/pdf' &&
+             request.resource.size < 10 * 1024 * 1024; // 10MB limit
+    }
+    
+    function isValidFile() {
+      return isValidImageFile() || isValidDocumentFile();
+    }
+
+    // Profile photos
+    match /profile-photos/{userId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && isOwner(userId) && isValidImageFile();
+      allow delete: if isAuthenticated() && isOwner(userId);
+    }
+
+    // Consultation attachments
+    match /consultation-attachments/{consultationId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && isValidFile();
+      allow delete: if isAuthenticated();
+    }
+
+    // Message attachments
+    match /message-attachments/{conversationId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && isValidFile();
+      allow delete: if isAuthenticated();
+    }
+
+    // Library documents
+    match /library-documents/{documentId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && isValidDocumentFile();
+      allow delete: if isAuthenticated();
+    }
+
+    // Support ticket attachments
+    match /support-attachments/{ticketId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && isValidFile();
+      allow delete: if isAuthenticated();
+    }
+
+    // Video call recordings (if implemented)
+    match /call-recordings/{callId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated();
+      allow delete: if isAuthenticated();
+    }
+
+    // Temporary uploads
+    match /temp-uploads/{userId}/{fileName} {
+      allow read, write: if isAuthenticated() && isOwner(userId) && isValidFile();
+      allow delete: if isAuthenticated() && isOwner(userId);
+    }
+
+    // Public assets (read-only for authenticated users)
+    match /public/{allPaths=**} {
+      allow read: if isAuthenticated();
+      allow write: if false; // Only admins can upload public assets via admin SDK
+    }
+  }
+}

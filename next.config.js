@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  trailingSlash: true,
   distDir: 'out',
+  trailingSlash: true,
   images: {
-    unoptimized: true,
-    domains: [],
-    formats: ['image/webp']
+    unoptimized: true
   },
   eslint: {
     ignoreDuringBuilds: true
@@ -14,20 +12,19 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
+  // إعدادات لحل مشكلة timeout
   experimental: {
-    appDir: true,
-    optimizeCss: true
-  },
-  env: {
-    NODE_ENV: 'production',
-    NEXT_TELEMETRY_DISABLED: '1'
+    staticPageGenerationTimeout: 300,
+    workerThreads: false,
+    cpus: 1,
+    isrMemoryCacheSize: 0
   },
   // تحسين الأداء
   swcMinify: true,
   reactStrictMode: false,
-  // إزالة console.log في الإنتاج
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production'
+  // متغيرات البيئة
+  env: {
+    NEXT_TELEMETRY_DISABLED: '1'
   }
 };
 

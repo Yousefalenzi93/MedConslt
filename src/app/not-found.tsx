@@ -1,28 +1,26 @@
 import Link from 'next/link';
-import { ExclamationTriangleIcon, HomeIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <div className="text-center">
-            {/* 404 Icon */}
-            <div className="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-red-100">
-              <ExclamationTriangleIcon className="h-12 w-12 text-red-600" />
-            </div>
-
-            {/* 404 Number */}
-            <h1 className="mt-6 text-6xl font-bold text-gray-900">404</h1>
-            
-            {/* Error Message */}
-            <h2 className="mt-4 text-2xl font-bold text-gray-900">
-              الصفحة غير موجودة
-            </h2>
-            <p className="mt-2 text-base text-gray-600">
-              عذراً، لا يمكن العثور على الصفحة التي تبحث عنها
-            </p>
-          </div>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-6xl font-bold text-gray-900 mb-4">404</h1>
+        <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          الصفحة غير موجودة
+        </h2>
+        <p className="text-gray-600 mb-8">
+          عذراً، الصفحة التي تبحث عنها غير موجودة.
+        </p>
+        <Link
+          href="/"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg"
+        >
+          العودة للصفحة الرئيسية
+        </Link>
+      </div>
+    </div>
+  );
+}
 
           {/* Suggestions */}
           <div className="mt-8">
@@ -49,13 +47,13 @@ export default function NotFound() {
               العودة للصفحة الرئيسية
             </Link>
             
-            <button
-              onClick={() => window.history.back()}
+            <Link
+              href="/"
               className="w-full flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
             >
               <ArrowRightIcon className="w-4 h-4 ml-2" />
-              العودة للصفحة السابقة
-            </button>
+              العودة للصفحة الرئيسية
+            </Link>
           </div>
 
           {/* Quick Links */}

@@ -1,6 +1,6 @@
 [build]
   publish = "out"
-  command = "npm ci && npm run build"
+  command = "npm install --legacy-peer-deps --no-audit --no-fund && npm run build"
 
 [build.environment]
   NODE_VERSION = "18.17.0"
@@ -9,6 +9,12 @@
   NEXT_TELEMETRY_DISABLED = "1"
   CI = "true"
   NETLIFY = "true"
+  NPM_CONFIG_LEGACY_PEER_DEPS = "true"
+  NPM_CONFIG_FUND = "false"
+  NPM_CONFIG_AUDIT = "false"
+  # إعدادات لحل مشكلة timeout
+  NEXT_STATIC_GENERATION_TIMEOUT = "120"
+  NODE_OPTIONS = "--max-old-space-size=4096"
 
 # Headers for security and performance
 [[headers]]
