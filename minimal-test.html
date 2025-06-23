@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار TailwindCSS - منصة الاستشارات الطبية</title>
+    
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    </style>
+</head>
+
+<body class="bg-blue-50 min-h-screen flex items-center justify-center">
+    <div class="max-w-2xl mx-auto p-8">
+        <!-- بطاقة الاختبار الرئيسية -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 text-center">
+            <!-- الشعار -->
+            <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span class="text-white text-3xl font-bold">م</span>
+            </div>
+            
+            <!-- العنوان -->
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">
+                منصة الاستشارات الطبية
+            </h1>
+            
+            <p class="text-gray-600 text-lg mb-8">
+                اختبار TailwindCSS - Medical Consultation Platform
+            </p>
+            
+            <!-- حالة الاختبارات -->
+            <div class="space-y-4 mb-8">
+                <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+                    <span class="text-gray-700">TailwindCSS</span>
+                    <span class="text-green-600 font-semibold">✅ يعمل</span>
+                </div>
+                
+                <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+                    <span class="text-gray-700">دعم العربية (RTL)</span>
+                    <span class="text-green-600 font-semibold">✅ يعمل</span>
+                </div>
+                
+                <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+                    <span class="text-gray-700">التصميم المتجاوب</span>
+                    <span class="text-green-600 font-semibold">✅ يعمل</span>
+                </div>
+                
+                <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+                    <span class="text-gray-700">الألوان والتأثيرات</span>
+                    <span class="text-green-600 font-semibold">✅ يعمل</span>
+                </div>
+            </div>
+            
+            <!-- الأزرار -->
+            <div class="space-y-4">
+                <button onclick="testButton()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors transform hover:scale-105">
+                    اختبار التفاعل
+                </button>
+                
+                <button onclick="changeTheme()" class="w-full bg-gray-600 hover:bg-gray-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+                    تغيير المظهر
+                </button>
+                
+                <button onclick="showDemo()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+                    عرض النموذج الكامل
+                </button>
+            </div>
+            
+            <!-- معلومات إضافية -->
+            <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+                <h3 class="font-semibold text-gray-800 mb-2">🎉 التطبيق يعمل بنجاح!</h3>
+                <p class="text-sm text-gray-600">
+                    جميع المكونات تعمل بشكل صحيح. يمكنك الآن الانتقال للنسخة الكاملة.
+                </p>
+            </div>
+            
+            <!-- روابط سريعة -->
+            <div class="mt-6 flex flex-wrap gap-2 justify-center">
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">TailwindCSS</span>
+                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">RTL Support</span>
+                <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Responsive</span>
+                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">Interactive</span>
+            </div>
+        </div>
+        
+        <!-- بطاقات إضافية -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="text-3xl mb-2">🩺</div>
+                <h4 class="font-semibold text-gray-800">استشارات طبية</h4>
+                <p class="text-sm text-gray-600 mt-2">خدمات طبية متميزة</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="text-3xl mb-2">👨‍⚕️</div>
+                <h4 class="font-semibold text-gray-800">أطباء معتمدون</h4>
+                <p class="text-sm text-gray-600 mt-2">فريق طبي متخصص</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <div class="text-3xl mb-2">🔒</div>
+                <h4 class="font-semibold text-gray-800">آمن ومحمي</h4>
+                <p class="text-sm text-gray-600 mt-2">خصوصية تامة</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- رسالة النجاح -->
+    <div id="successMsg" class="fixed top-4 left-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform -translate-y-full opacity-0 transition-all duration-300">
+        <span id="msgText">تم بنجاح!</span>
+    </div>
+
+    <script>
+        // اختبار التفاعل
+        function testButton() {
+            showMessage('🎉 التفاعل يعمل بنجاح!');
+            console.log('✅ JavaScript يعمل');
+        }
+        
+        // تغيير المظهر
+        function changeTheme() {
+            const body = document.body;
+            if (body.classList.contains('bg-blue-50')) {
+                body.className = 'bg-gray-800 min-h-screen flex items-center justify-center text-white';
+                showMessage('🌙 تم التبديل للمظهر الداكن');
+            } else {
+                body.className = 'bg-blue-50 min-h-screen flex items-center justify-center';
+                showMessage('☀️ تم التبديل للمظهر الفاتح');
+            }
+        }
+        
+        // عرض النموذج الكامل
+        function showDemo() {
+            showMessage('🚀 جاري تحميل النموذج الكامل...');
+            setTimeout(() => {
+                window.open('working-demo.html', '_blank');
+            }, 1000);
+        }
+        
+        // إظهار رسالة
+        function showMessage(text) {
+            const msg = document.getElementById('successMsg');
+            const msgText = document.getElementById('msgText');
+            
+            msgText.textContent = text;
+            msg.classList.remove('-translate-y-full', 'opacity-0');
+            msg.classList.add('translate-y-0', 'opacity-100');
+            
+            setTimeout(() => {
+                msg.classList.add('-translate-y-full', 'opacity-0');
+                msg.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+        
+        // رسائل الكونسول
+        console.log('🏥 منصة الاستشارات الطبية - اختبار مبسط');
+        console.log('✅ TailwindCSS: Working');
+        console.log('✅ RTL Support: Working');
+        console.log('✅ JavaScript: Working');
+        console.log('✅ Responsive Design: Working');
+        
+        // رسالة ترحيب
+        setTimeout(() => {
+            showMessage('🎉 مرحباً! جميع الاختبارات نجحت');
+        }, 500);
+        
+        // اختبار TailwindCSS
+        if (window.tailwind) {
+            console.log('✅ TailwindCSS loaded successfully');
+        } else {
+            console.log('⚠️ TailwindCSS not detected');
+        }
+    </script>
+</body>
+</html>

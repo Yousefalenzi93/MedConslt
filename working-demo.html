@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الاستشارات الطبية - نسخة تجريبية</title>
+    
+    <!-- TailwindCSS من CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- إعدادات TailwindCSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- خطوط Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">م</span>
+                    </div>
+                    <h1 class="mr-3 text-xl font-bold text-gray-800">منصة الاستشارات الطبية</h1>
+                </div>
+                <button onclick="showLoginModal()" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-lg transition-colors">
+                    تسجيل الدخول
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-primary-500 to-primary-700 text-white py-20">
+        <div class="max-w-6xl mx-auto px-4 text-center fade-in">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                أفضل منصة للاستشارات الطبية
+            </h2>
+            <p class="text-xl mb-8 text-blue-100">
+                تواصل مع أطباء معتمدين واحصل على استشارة طبية موثوقة من منزلك
+            </p>
+            <div class="space-x-4 space-x-reverse">
+                <button onclick="showLoginModal()" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors">
+                    ابدأ الآن
+                </button>
+                <button onclick="scrollToServices()" class="border-2 border-white text-white hover:bg-white hover:text-primary-600 px-8 py-3 rounded-lg font-semibold transition-colors">
+                    اعرف المزيد
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-gray-800 mb-4">خدماتنا الطبية</h3>
+                <p class="text-gray-600 text-lg">نقدم مجموعة شاملة من الخدمات الطبية المتخصصة</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- خدمة 1 -->
+                <div class="text-center p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🩺</span>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-2">استشارات عامة</h4>
+                    <p class="text-gray-600">استشارات طبية شاملة مع أطباء عامين متخصصين</p>
+                </div>
+                
+                <!-- خدمة 2 -->
+                <div class="text-center p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">❤️</span>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-2">طب القلب</h4>
+                    <p class="text-gray-600">فحص وعلاج أمراض القلب والأوعية الدموية</p>
+                </div>
+                
+                <!-- خدمة 3 -->
+                <div class="text-center p-6 rounded-lg border border-gray-200 hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">👶</span>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-2">طب الأطفال</h4>
+                    <p class="text-gray-600">رعاية صحية متخصصة للأطفال والمراهقين</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-primary-600 text-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-4xl font-bold mb-2">1000+</div>
+                    <div class="text-primary-100">طبيب معتمد</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold mb-2">50000+</div>
+                    <div class="text-primary-100">استشارة مكتملة</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold mb-2">4.9</div>
+                    <div class="text-primary-100">تقييم المستخدمين</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold mb-2">24/7</div>
+                    <div class="text-primary-100">دعم متواصل</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctors Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-bold text-gray-800 mb-4">أطباؤنا المتميزون</h3>
+                <p class="text-gray-600 text-lg">فريق من أفضل الأطباء المعتمدين والمتخصصين</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- طبيب 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm text-center">
+                    <div class="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-2xl font-bold">أ</span>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-1">د. أحمد محمد</h4>
+                    <p class="text-primary-600 mb-2">طب عام</p>
+                    <p class="text-gray-600 text-sm mb-4">15 سنة خبرة</p>
+                    <div class="flex justify-center mb-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                    <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg transition-colors">
+                        احجز استشارة
+                    </button>
+                </div>
+                
+                <!-- طبيب 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm text-center">
+                    <div class="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-2xl font-bold">ف</span>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-1">د. فاطمة علي</h4>
+                    <p class="text-primary-600 mb-2">طب الأطفال</p>
+                    <p class="text-gray-600 text-sm mb-4">12 سنة خبرة</p>
+                    <div class="flex justify-center mb-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                    <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg transition-colors">
+                        احجز استشارة
+                    </button>
+                </div>
+                
+                <!-- طبيب 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm text-center">
+                    <div class="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-2xl font-bold">م</span>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-1">د. محمد حسن</h4>
+                    <p class="text-primary-600 mb-2">طب القلب</p>
+                    <p class="text-gray-600 text-sm mb-4">20 سنة خبرة</p>
+                    <div class="flex justify-center mb-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                    <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg transition-colors">
+                        احجز استشارة
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold">م</span>
+                        </div>
+                        <span class="mr-2 text-xl font-bold">منصة الاستشارات الطبية</span>
+                    </div>
+                    <p class="text-gray-400">نقدم أفضل الخدمات الطبية الرقمية مع ضمان الجودة والأمان</p>
+                </div>
+                
+                <div>
+                    <h5 class="font-semibold mb-4">روابط سريعة</h5>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">من نحن</a></li>
+                        <li><a href="#" class="hover:text-white">خدماتنا</a></li>
+                        <li><a href="#" class="hover:text-white">الأطباء</a></li>
+                        <li><a href="#" class="hover:text-white">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="font-semibold mb-4">الدعم</h5>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">مركز المساعدة</a></li>
+                        <li><a href="#" class="hover:text-white">سياسة الخصوصية</a></li>
+                        <li><a href="#" class="hover:text-white">شروط الاستخدام</a></li>
+                        <li><a href="#" class="hover:text-white">الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>© 2024 منصة الاستشارات الطبية. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-primary-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="text-white font-bold text-2xl">م</span>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800">تسجيل الدخول</h3>
+            </div>
+            
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني</label>
+                    <input type="email" id="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="example@domain.com">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">كلمة المرور</label>
+                    <input type="password" id="password" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="••••••••">
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="rounded border-gray-300 text-primary-600">
+                        <span class="mr-2 text-sm text-gray-600">تذكرني</span>
+                    </label>
+                    <a href="#" class="text-sm text-primary-600 hover:text-primary-500">نسيت كلمة المرور؟</a>
+                </div>
+                
+                <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white py-2 rounded-lg font-medium transition-colors">
+                    تسجيل الدخول
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600">
+                    ليس لديك حساب؟ 
+                    <a href="#" class="text-primary-600 hover:text-primary-500 font-medium">إنشاء حساب</a>
+                </p>
+            </div>
+            
+            <button onclick="hideLoginModal()" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600 text-2xl">
+                ×
+            </button>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="fixed top-4 left-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden z-50">
+        <span id="messageText">تم بنجاح!</span>
+    </div>
+
+    <script>
+        // إظهار نافذة تسجيل الدخول
+        function showLoginModal() {
+            document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('loginModal').classList.add('flex');
+        }
+
+        // إخفاء نافذة تسجيل الدخول
+        function hideLoginModal() {
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('loginModal').classList.remove('flex');
+        }
+
+        // التمرير إلى قسم الخدمات
+        function scrollToServices() {
+            document.getElementById('services').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        // معالجة تسجيل الدخول
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email && password) {
+                // إخفاء النافذة
+                hideLoginModal();
+                
+                // إظهار رسالة النجاح
+                showSuccessMessage('تم تسجيل الدخول بنجاح!');
+                
+                // مسح النموذج
+                document.getElementById('email').value = '';
+                document.getElementById('password').value = '';
+            }
+        }
+
+        // إظهار رسالة النجاح
+        function showSuccessMessage(message) {
+            const messageEl = document.getElementById('successMessage');
+            const textEl = document.getElementById('messageText');
+            
+            textEl.textContent = message;
+            messageEl.classList.remove('hidden');
+            
+            // إخفاء الرسالة بعد 3 ثوان
+            setTimeout(() => {
+                messageEl.classList.add('hidden');
+            }, 3000);
+        }
+
+        // إغلاق النافذة عند النقر خارجها
+        document.getElementById('loginModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideLoginModal();
+            }
+        });
+
+        // رسائل في الكونسول
+        console.log('🏥 منصة الاستشارات الطبية - نسخة تجريبية');
+        console.log('✅ TailwindCSS يعمل بنجاح');
+        console.log('✅ JavaScript يعمل بنجاح');
+        console.log('✅ دعم العربية يعمل بنجاح');
+        
+        // اختبار TailwindCSS
+        console.log('🎨 TailwindCSS Status: Working');
+        
+        // إظهار رسالة ترحيب
+        setTimeout(() => {
+            showSuccessMessage('مرحباً بك في منصة الاستشارات الطبية!');
+        }, 1000);
+    </script>
+</body>
+</html>

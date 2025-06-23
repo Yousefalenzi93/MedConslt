@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الاستشارات الطبية - واجهة بسيطة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'arabic': ['Cairo', 'Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', 'Tajawal', sans-serif; }
+        .animate-fade-in { animation: fadeIn 0.5s ease-in; }
+        .animate-slide-up { animation: slideUp 0.3s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">م</span>
+                    </div>
+                    <span class="mr-2 text-xl font-bold text-gray-900">منصة الاستشارات الطبية</span>
+                </div>
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <button onclick="toggleLanguage()" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        🌐 العربية
+                    </button>
+                    <button onclick="toggleTheme()" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        🌙 المظهر
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Hero Section -->
+        <section class="text-center mb-12 animate-fade-in">
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+                    منصة الاستشارات الطبية
+                </h1>
+                <p class="text-xl text-gray-600 mb-8">
+                    تواصل مع أفضل الأطباء واحصل على استشارة طبية موثوقة
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="showLogin()" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors shadow-lg hover:shadow-xl">
+                        ابدأ الآن
+                    </button>
+                    <button onclick="showFeatures()" class="border border-primary-600 text-primary-600 hover:bg-primary-50 px-8 py-4 rounded-lg font-semibold transition-colors">
+                        تعرف على المزيد
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow animate-slide-up">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                    <span class="text-2xl">🩺</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">استشارات فورية</h3>
+                <p class="text-gray-600">احصل على استشارة طبية من أطباء معتمدين في أي وقت</p>
+            </div>
+            
+            <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow animate-slide-up" style="animation-delay: 0.1s">
+                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                    <span class="text-2xl">🔒</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">آمن ومحمي</h3>
+                <p class="text-gray-600">جميع بياناتك الطبية محمية بأعلى معايير الأمان</p>
+            </div>
+            
+            <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 hover:shadow-md transition-shadow animate-slide-up" style="animation-delay: 0.2s">
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                    <span class="text-2xl">⏰</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">متاح 24/7</h3>
+                <p class="text-gray-600">خدماتنا متاحة على مدار الساعة لضمان حصولك على الرعاية الطبية</p>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="bg-primary-600 rounded-lg p-8 text-white mb-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-3xl font-bold mb-2">1000+</div>
+                    <div class="text-primary-100">طبيب معتمد</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold mb-2">50000+</div>
+                    <div class="text-primary-100">استشارة مكتملة</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold mb-2">4.9</div>
+                    <div class="text-primary-100">تقييم المستخدمين</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold mb-2">24/7</div>
+                    <div class="text-primary-100">دعم متواصل</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Login Modal -->
+        <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+            <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 animate-slide-up">
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 bg-primary-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-2xl">م</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900">تسجيل الدخول</h2>
+                </div>
+                
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني</label>
+                        <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="example@domain.com">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">كلمة المرور</label>
+                        <input type="password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder="••••••••">
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded border-gray-300 text-primary-600 focus:ring-primary-500">
+                            <span class="mr-2 text-sm text-gray-600">تذكرني</span>
+                        </label>
+                        <a href="#" class="text-sm text-primary-600 hover:text-primary-500">نسيت كلمة المرور؟</a>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white py-2 rounded-lg font-medium transition-colors">
+                        تسجيل الدخول
+                    </button>
+                </form>
+                
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-gray-600">
+                        ليس لديك حساب؟ 
+                        <a href="#" class="text-primary-600 hover:text-primary-500 font-medium">إنشاء حساب</a>
+                    </p>
+                </div>
+                
+                <button onclick="hideLogin()" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600">
+                    <span class="text-2xl">×</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">م</span>
+                        </div>
+                        <span class="mr-2 text-xl font-bold text-gray-900">منصة الاستشارات الطبية</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">تواصل مع أفضل الأطباء واحصل على استشارة طبية موثوقة</p>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-4">روابط سريعة</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><a href="#" class="hover:text-primary-600">من نحن</a></li>
+                        <li><a href="#" class="hover:text-primary-600">خدماتنا</a></li>
+                        <li><a href="#" class="hover:text-primary-600">الأطباء</a></li>
+                        <li><a href="#" class="hover:text-primary-600">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-4">الدعم</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><a href="#" class="hover:text-primary-600">مركز المساعدة</a></li>
+                        <li><a href="#" class="hover:text-primary-600">سياسة الخصوصية</a></li>
+                        <li><a href="#" class="hover:text-primary-600">شروط الاستخدام</a></li>
+                        <li><a href="#" class="hover:text-primary-600">الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-gray-200 text-center text-gray-500">
+                <p>© 2024 منصة الاستشارات الطبية. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript Functions
+        function showLogin() {
+            document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('loginModal').classList.add('flex');
+        }
+        
+        function hideLogin() {
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('loginModal').classList.remove('flex');
+        }
+        
+        function showFeatures() {
+            document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function toggleLanguage() {
+            const html = document.documentElement;
+            if (html.lang === 'ar') {
+                html.lang = 'en';
+                html.dir = 'ltr';
+                // يمكن إضافة ترجمة هنا
+                alert('Language switched to English (Translation not implemented in this demo)');
+            } else {
+                html.lang = 'ar';
+                html.dir = 'rtl';
+                alert('تم التبديل إلى العربية');
+            }
+        }
+        
+        function toggleTheme() {
+            const body = document.body;
+            if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('loginModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideLogin();
+            }
+        });
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+        }
+        
+        console.log('منصة الاستشارات الطبية - واجهة ويب بسيطة مع TailwindCSS');
+        console.log('Medical Consultation Platform - Simple Web Interface with TailwindCSS');
+    </script>
+</body>
+</html>

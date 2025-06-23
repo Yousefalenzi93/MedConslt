@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الاستشارات الطبية - واجهة متقدمة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'arabic': ['Cairo', 'Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'slide-down': 'slideDown 0.3s ease-out',
+                        'pulse-slow': 'pulse 3s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', 'Tajawal', sans-serif; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300" x-data="medicalApp()">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">م</span>
+                    </div>
+                    <span class="mr-2 text-xl font-bold text-gray-900 dark:text-white">منصة الاستشارات الطبية</span>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex items-center space-x-8 space-x-reverse">
+                    <a href="#home" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">الرئيسية</a>
+                    <a href="#services" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">الخدمات</a>
+                    <a href="#doctors" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">الأطباء</a>
+                    <a href="#about" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">من نحن</a>
+                </nav>
+
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <!-- Language Toggle -->
+                    <button @click="toggleLanguage()" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <span x-text="currentLang === 'ar' ? '🌐 العربية' : '🌐 English'"></span>
+                    </button>
+
+                    <!-- Theme Toggle -->
+                    <button @click="toggleTheme()" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <span x-text="isDark ? '☀️' : '🌙'"></span>
+                    </button>
+
+                    <!-- Login Button -->
+                    <button @click="showLogin = true" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                        تسجيل الدخول
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-gray-500 dark:text-gray-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div x-show="mobileMenuOpen" x-transition class="md:hidden py-4 border-t border-gray-200 dark:border-gray-700">
+                <nav class="space-y-2">
+                    <a href="#home" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">الرئيسية</a>
+                    <a href="#services" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">الخدمات</a>
+                    <a href="#doctors" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">الأطباء</a>
+                    <a href="#about" class="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">من نحن</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate-fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    منصة الاستشارات الطبية
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100">
+                    تواصل مع أفضل الأطباء واحصل على استشارة طبية موثوقة
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button @click="showLogin = true" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold transition-colors shadow-lg hover:shadow-xl">
+                        ابدأ الآن
+                    </button>
+                    <button @click="scrollToSection('services')" class="border-2 border-white text-white hover:bg-white hover:text-primary-600 px-8 py-4 rounded-lg font-semibold transition-colors">
+                        تعرف على المزيد
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">خدماتنا الطبية</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">نقدم مجموعة شاملة من الخدمات الطبية المتخصصة</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="(service, index) in services" :key="index">
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4" :class="service.bgColor">
+                            <span class="text-2xl" x-text="service.icon"></span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" x-text="service.title"></h3>
+                        <p class="text-gray-600 dark:text-gray-400" x-text="service.description"></p>
+                        <button class="mt-4 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium">
+                            اعرف المزيد ←
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctors Section -->
+    <section id="doctors" class="py-20 bg-gray-50 dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">أطباؤنا المتميزون</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">فريق من أفضل الأطباء المعتمدين والمتخصصين</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="(doctor, index) in doctors" :key="index">
+                    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+                        <div class="w-24 h-24 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl font-bold" x-text="doctor.initial"></span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-1" x-text="doctor.name"></h3>
+                        <p class="text-primary-600 dark:text-primary-400 mb-2" x-text="doctor.specialty"></p>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4" x-text="doctor.experience"></p>
+                        <div class="flex justify-center mb-4">
+                            <template x-for="i in 5" :key="i">
+                                <span class="text-yellow-400 text-lg">★</span>
+                            </template>
+                        </div>
+                        <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                            احجز استشارة
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-primary-600 dark:bg-primary-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
+                <template x-for="(stat, index) in stats" :key="index">
+                    <div class="animate-pulse-slow">
+                        <div class="text-3xl md:text-4xl font-bold mb-2" x-text="stat.number"></div>
+                        <div class="text-primary-100" x-text="stat.label"></div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">من نحن</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
+                        نحن منصة طبية رائدة تهدف إلى تقديم أفضل الخدمات الطبية الرقمية. نربط المرضى بأفضل الأطباء المعتمدين لتقديم استشارات طبية موثوقة وآمنة.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-sm">✓</span>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300">أطباء معتمدون ومتخصصون</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-sm">✓</span>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300">خدمة متاحة 24/7</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-sm">✓</span>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300">أمان وخصوصية عالية</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-900 dark:to-primary-800 rounded-lg p-8 text-center">
+                    <div class="text-6xl mb-4">🏥</div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">رؤيتنا</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        أن نكون المنصة الطبية الرقمية الأولى في المنطقة، نقدم خدمات طبية متميزة وموثوقة لجميع المرضى.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div x-show="showLogin" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" @click.self="showLogin = false">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md w-full mx-4 animate-slide-up">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-primary-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="text-white font-bold text-2xl">م</span>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">تسجيل الدخول</h2>
+            </div>
+
+            <form @submit.prevent="handleLogin()" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">البريد الإلكتروني</label>
+                    <input x-model="loginForm.email" type="email" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white" placeholder="example@domain.com">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">كلمة المرور</label>
+                    <div class="relative">
+                        <input x-model="loginForm.password" :type="showPassword ? 'text' : 'password'" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white" placeholder="••••••••">
+                        <button type="button" @click="showPassword = !showPassword" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                            <span x-text="showPassword ? '👁️' : '👁️‍🗨️'"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center">
+                        <input x-model="loginForm.remember" type="checkbox" class="rounded border-gray-300 text-primary-600 focus:ring-primary-500">
+                        <span class="mr-2 text-sm text-gray-600 dark:text-gray-400">تذكرني</span>
+                    </label>
+                    <a href="#" class="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-500">نسيت كلمة المرور؟</a>
+                </div>
+
+                <button type="submit" :disabled="loginLoading" class="w-full bg-primary-600 hover:bg-primary-700 disabled:opacity-50 text-white py-2 rounded-lg font-medium transition-colors">
+                    <span x-show="!loginLoading">تسجيل الدخول</span>
+                    <span x-show="loginLoading">جاري التحميل...</span>
+                </button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    ليس لديك حساب؟
+                    <button @click="showRegister = true; showLogin = false" class="text-primary-600 dark:text-primary-400 hover:text-primary-500 font-medium">إنشاء حساب</button>
+                </p>
+            </div>
+
+            <button @click="showLogin = false" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                <span class="text-2xl">×</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div x-show="showRegister" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" @click.self="showRegister = false">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md w-full mx-4 animate-slide-up max-h-[90vh] overflow-y-auto">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-primary-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="text-white font-bold text-2xl">م</span>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">إنشاء حساب جديد</h2>
+            </div>
+
+            <form @submit.prevent="handleRegister()" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">الاسم الأول</label>
+                        <input x-model="registerForm.firstName" type="text" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">اسم العائلة</label>
+                        <input x-model="registerForm.lastName" type="text" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">البريد الإلكتروني</label>
+                    <input x-model="registerForm.email" type="email" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">نوع المستخدم</label>
+                    <select x-model="registerForm.userType" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                        <option value="patient">مريض</option>
+                        <option value="doctor">طبيب</option>
+                    </select>
+                </div>
+
+                <div x-show="registerForm.userType === 'doctor'">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">التخصص</label>
+                    <select x-model="registerForm.specialty" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                        <option value="">اختر التخصص</option>
+                        <option value="general">طب عام</option>
+                        <option value="pediatrics">طب الأطفال</option>
+                        <option value="cardiology">طب القلب</option>
+                        <option value="dermatology">طب الجلدية</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">كلمة المرور</label>
+                    <input x-model="registerForm.password" type="password" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                </div>
+
+                <div>
+                    <label class="flex items-center">
+                        <input x-model="registerForm.agree" type="checkbox" required class="rounded border-gray-300 text-primary-600 focus:ring-primary-500">
+                        <span class="mr-2 text-sm text-gray-600 dark:text-gray-400">أوافق على الشروط والأحكام</span>
+                    </label>
+                </div>
+
+                <button type="submit" :disabled="registerLoading" class="w-full bg-primary-600 hover:bg-primary-700 disabled:opacity-50 text-white py-2 rounded-lg font-medium transition-colors">
+                    <span x-show="!registerLoading">إنشاء حساب</span>
+                    <span x-show="registerLoading">جاري التحميل...</span>
+                </button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    لديك حساب بالفعل؟
+                    <button @click="showLogin = true; showRegister = false" class="text-primary-600 dark:text-primary-400 hover:text-primary-500 font-medium">تسجيل الدخول</button>
+                </p>
+            </div>
+
+            <button @click="showRegister = false" class="absolute top-4 left-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                <span class="text-2xl">×</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">م</span>
+                        </div>
+                        <span class="mr-2 text-xl font-bold text-gray-900 dark:text-white">منصة الاستشارات الطبية</span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4 max-w-md">
+                        نقدم أفضل الخدمات الطبية الرقمية مع ضمان الجودة والأمان والخصوصية التامة لجميع مرضانا.
+                    </p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                            <span class="text-green-500 mr-2">🛡️</span>
+                            آمن ومحمي
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                            <span class="text-blue-500 mr-2">⏰</span>
+                            24/7 متاح
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
+                        روابط سريعة
+                    </h3>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">من نحن</a></li>
+                        <li><a href="#services" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">خدماتنا</a></li>
+                        <li><a href="#doctors" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">الأطباء</a></li>
+                        <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">اتصل بنا</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
+                        الدعم
+                    </h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">مركز المساعدة</a></li>
+                        <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">سياسة الخصوصية</a></li>
+                        <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">شروط الاستخدام</a></li>
+                        <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">
+                        © 2024 منصة الاستشارات الطبية. جميع الحقوق محفوظة.
+                    </p>
+                    <div class="flex items-center mt-4 md:mt-0">
+                        <span class="text-gray-500 dark:text-gray-400 text-sm mr-2">صنع بـ</span>
+                        <span class="text-red-500">❤️</span>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm ml-2">في المملكة العربية السعودية</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div x-show="notification.show" x-transition.opacity class="fixed top-4 left-4 rtl:left-auto rtl:right-4 z-50 max-w-sm">
+        <div :class="notification.type === 'success' ? 'bg-green-500' : 'bg-red-500'" class="text-white px-6 py-4 rounded-lg shadow-lg">
+            <p x-text="notification.message"></p>
+        </div>
+    </div>
+
+    <script>
+        function medicalApp() {
+            return {
+                // State
+                currentLang: 'ar',
+                isDark: localStorage.getItem('theme') === 'dark',
+                mobileMenuOpen: false,
+                showLogin: false,
+                showRegister: false,
+                showPassword: false,
+                loginLoading: false,
+                registerLoading: false,
+
+                // Forms
+                loginForm: {
+                    email: '',
+                    password: '',
+                    remember: false
+                },
+                registerForm: {
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    userType: 'patient',
+                    specialty: '',
+                    password: '',
+                    agree: false
+                },
+
+                // Notification
+                notification: {
+                    show: false,
+                    message: '',
+                    type: 'success'
+                },
+
+                // Data
+                services: [
+                    {
+                        icon: '🩺',
+                        title: 'استشارات عامة',
+                        description: 'استشارات طبية شاملة مع أطباء عامين متخصصين',
+                        bgColor: 'bg-blue-100 dark:bg-blue-900'
+                    },
+                    {
+                        icon: '❤️',
+                        title: 'طب القلب',
+                        description: 'فحص وعلاج أمراض القلب والأوعية الدموية',
+                        bgColor: 'bg-red-100 dark:bg-red-900'
+                    },
+                    {
+                        icon: '🧠',
+                        title: 'طب الأعصاب',
+                        description: 'تشخيص وعلاج اضطرابات الجهاز العصبي',
+                        bgColor: 'bg-purple-100 dark:bg-purple-900'
+                    },
+                    {
+                        icon: '👶',
+                        title: 'طب الأطفال',
+                        description: 'رعاية صحية متخصصة للأطفال والمراهقين',
+                        bgColor: 'bg-green-100 dark:bg-green-900'
+                    },
+                    {
+                        icon: '👁️',
+                        title: 'طب العيون',
+                        description: 'فحص وعلاج مشاكل البصر والعيون',
+                        bgColor: 'bg-yellow-100 dark:bg-yellow-900'
+                    },
+                    {
+                        icon: '🦷',
+                        title: 'طب الأسنان',
+                        description: 'علاج وتجميل الأسنان واللثة',
+                        bgColor: 'bg-indigo-100 dark:bg-indigo-900'
+                    }
+                ],
+
+                doctors: [
+                    {
+                        name: 'د. أحمد محمد',
+                        specialty: 'طب عام',
+                        experience: '15 سنة خبرة',
+                        initial: 'أ'
+                    },
+                    {
+                        name: 'د. فاطمة علي',
+                        specialty: 'طب الأطفال',
+                        experience: '12 سنة خبرة',
+                        initial: 'ف'
+                    },
+                    {
+                        name: 'د. محمد حسن',
+                        specialty: 'طب القلب',
+                        experience: '20 سنة خبرة',
+                        initial: 'م'
+                    }
+                ],
+
+                stats: [
+                    { number: '1000+', label: 'طبيب معتمد' },
+                    { number: '50000+', label: 'استشارة مكتملة' },
+                    { number: '4.9', label: 'تقييم المستخدمين' },
+                    { number: '24/7', label: 'دعم متواصل' }
+                ],
+
+                // Methods
+                init() {
+                    if (this.isDark) {
+                        document.documentElement.classList.add('dark');
+                    }
+                },
+
+                toggleTheme() {
+                    this.isDark = !this.isDark;
+                    if (this.isDark) {
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('theme', 'light');
+                    }
+                },
+
+                toggleLanguage() {
+                    this.currentLang = this.currentLang === 'ar' ? 'en' : 'ar';
+                    document.documentElement.lang = this.currentLang;
+                    document.documentElement.dir = this.currentLang === 'ar' ? 'rtl' : 'ltr';
+                    this.showNotification('تم تغيير اللغة بنجاح', 'success');
+                },
+
+                scrollToSection(sectionId) {
+                    document.getElementById(sectionId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                },
+
+                async handleLogin() {
+                    this.loginLoading = true;
+
+                    // Simulate API call
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+
+                    if (this.loginForm.email && this.loginForm.password) {
+                        this.showNotification('تم تسجيل الدخول بنجاح!', 'success');
+                        this.showLogin = false;
+                        this.resetLoginForm();
+                    } else {
+                        this.showNotification('يرجى ملء جميع الحقول', 'error');
+                    }
+
+                    this.loginLoading = false;
+                },
+
+                async handleRegister() {
+                    this.registerLoading = true;
+
+                    // Simulate API call
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+
+                    if (this.registerForm.firstName && this.registerForm.lastName &&
+                        this.registerForm.email && this.registerForm.password &&
+                        this.registerForm.agree) {
+                        this.showNotification('تم إنشاء الحساب بنجاح!', 'success');
+                        this.showRegister = false;
+                        this.resetRegisterForm();
+                    } else {
+                        this.showNotification('يرجى ملء جميع الحقول المطلوبة', 'error');
+                    }
+
+                    this.registerLoading = false;
+                },
+
+                resetLoginForm() {
+                    this.loginForm = {
+                        email: '',
+                        password: '',
+                        remember: false
+                    };
+                },
+
+                resetRegisterForm() {
+                    this.registerForm = {
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        userType: 'patient',
+                        specialty: '',
+                        password: '',
+                        agree: false
+                    };
+                },
+
+                showNotification(message, type = 'success') {
+                    this.notification = {
+                        show: true,
+                        message: message,
+                        type: type
+                    };
+
+                    setTimeout(() => {
+                        this.notification.show = false;
+                    }, 3000);
+                }
+            }
+        }
+
+        // Console messages
+        console.log('🏥 منصة الاستشارات الطبية - واجهة ويب متقدمة');
+        console.log('🚀 Medical Consultation Platform - Advanced Web Interface');
+        console.log('⚡ Built with TailwindCSS + Alpine.js');
+    </script>
+</body>
+</html>
