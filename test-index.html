@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="منصة الاستشارات الطبية - تواصل مع أفضل الأطباء واحصل على استشارة طبية موثوقة" />
+    <meta name="keywords" content="استشارة طبية, أطباء, صحة, طب, علاج, استشارة أونلاين" />
+    <meta name="author" content="Medical Consultation Platform" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="منصة الاستشارات الطبية" />
+    <meta property="og:description" content="تواصل مع أفضل الأطباء واحصل على استشارة طبية موثوقة" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ar_SA" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Medical Consult">
+    
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#0ea5e9">
+    
+    <title>منصة الاستشارات الطبية - اختبار</title>
+  </head>
+  <body class="font-arabic">
+    <div id="root">
+      <!-- Loading Screen -->
+      <div class="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+        <div class="text-center text-white">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse">
+            <span class="text-blue-600 text-3xl font-bold">م</span>
+          </div>
+          <h1 class="text-2xl font-bold mb-4">منصة الاستشارات الطبية</h1>
+          <p class="text-blue-100 mb-6">جاري تحميل التطبيق...</p>
+          <div class="flex justify-center">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Test Script to replace with React -->
+    <script type="module" src="/src/main-test.jsx"></script>
+    
+    <!-- Fallback if React fails -->
+    <script>
+      // Wait 3 seconds, if React doesn't load, show fallback
+      setTimeout(() => {
+        const root = document.getElementById('root');
+        if (root && root.innerHTML.includes('جاري تحميل التطبيق')) {
+          root.innerHTML = `
+            <div class="min-h-screen bg-red-50 flex items-center justify-center p-4">
+              <div class="bg-white rounded-lg shadow-lg p-8 max-w-md w-full text-center">
+                <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span class="text-white text-2xl">⚠️</span>
+                </div>
+                <h2 class="text-xl font-bold text-gray-800 mb-4">خطأ في تحميل React</h2>
+                <p class="text-gray-600 mb-6">لم يتم تحميل التطبيق بشكل صحيح</p>
+                
+                <div class="space-y-3 mb-6 text-left">
+                  <div class="bg-gray-50 p-3 rounded">
+                    <strong>الحلول المقترحة:</strong>
+                  </div>
+                  <div class="text-sm text-gray-600 space-y-2">
+                    <p>1. تأكد من تشغيل: <code class="bg-gray-100 px-2 py-1 rounded">npm run dev</code></p>
+                    <p>2. تحقق من Console للأخطاء (F12)</p>
+                    <p>3. تأكد من تثبيت التبعيات: <code class="bg-gray-100 px-2 py-1 rounded">npm install</code></p>
+                    <p>4. جرب: <code class="bg-gray-100 px-2 py-1 rounded">npm run build</code></p>
+                  </div>
+                </div>
+                
+                <button onclick="location.reload()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                  إعادة المحاولة
+                </button>
+                
+                <div class="mt-4 text-xs text-gray-500">
+                  <p>أو جرب الملفات البديلة:</p>
+                  <p>
+                    <a href="minimal-test.html" class="text-blue-500 hover:underline">minimal-test.html</a> | 
+                    <a href="working-demo.html" class="text-blue-500 hover:underline">working-demo.html</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      }, 3000);
+      
+      // Console messages
+      console.log('🏥 منصة الاستشارات الطبية - اختبار React');
+      console.log('🔍 إذا رأيت هذه الرسالة، فإن JavaScript يعمل');
+      console.log('⏳ انتظار تحميل React...');
+    </script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
