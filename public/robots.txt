@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /consultations
+Disallow: /messages
+Disallow: /analytics
+Disallow: /admin
+
+Sitemap: https://medical-consult.netlify.app/sitemap.xml
